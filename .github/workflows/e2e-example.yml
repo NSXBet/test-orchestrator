@@ -12,7 +12,7 @@ jobs:
   # Phase 1: Orchestrate
   orchestrate:
     name: Orchestrate
-    runs-on: ubuntu-24.04
+    runs-on: self-hosted-amd64
     outputs:
       test-list-files: ${{ steps.orchestrate.outputs.test-list-files }}
       use-orchestrator: ${{ steps.orchestrate.outputs.use-orchestrator }}
@@ -56,7 +56,7 @@ jobs:
   test:
     name: Test Shard ${{ matrix.shard }}
     needs: orchestrate
-    runs-on: ubuntu-24.04
+    runs-on: self-hosted-amd64
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.orchestrate.outputs.matrix) }}
@@ -109,7 +109,7 @@ jobs:
   merge:
     name: Merge Timing
     needs: test
-    runs-on: ubuntu-24.04
+    runs-on: self-hosted-amd64
     if: success() || failure()
     steps:
       - name: Checkout

@@ -10,7 +10,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   release:
     name: Release
-    runs-on: ubuntu-24.04
+    runs-on: self-hosted-amd64
     permissions:
       contents: write
       pull-requests: write
